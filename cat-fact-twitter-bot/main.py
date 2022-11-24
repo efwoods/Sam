@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 load_dotenv('.env')
 
 # Since you will be using Redis as your database, you will need to get the environment variable from the previous step and save it into a variable named r that can be called whenever we need to access the database. Using an environment variable allows us to be flexible because you will use an internal connection string when you deploy your bot.
-r = redis.from_url(os.environ["REDIS_URL_catS"])
+r = redis.from_url(os.environ["REDIS_URL_CATS"])
 
 # You will need to set a variable for your app to initialize it, as is typical at the start of every Flask app. You can also create a secret key for your app, so it’s a random string using the os package.
 app = Flask(__name__)
