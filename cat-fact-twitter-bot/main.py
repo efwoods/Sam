@@ -46,9 +46,9 @@ def make_token():
 
 # Since your bot will Tweet random facts about cats, you will need to get these from somewhere. There is a cat fact API that you can call to get facts to Tweet. The function parse_cat_fact allows you to make a GET request to the cat fact endpoint and format the JSON response to get a fact you can later Tweet.
 def parse_cat_fact():
-    url = "https://catfact.ninja/facts"
+    url = "https://catfact.ninja/fact"
     cat_fact = requests.request("GET", url).json()
-    return cat_fact["facts"][0]
+    return cat_fact["fact"]
 
 # To Tweet the cat fact, you can make a function that will indicate it is Tweeting which helps debug and makes a POST request to the Manage Tweets endpoint.
 def post_tweet(payload, token):
