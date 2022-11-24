@@ -2,14 +2,13 @@ import main
 import redis
 import json
 import os
-from dotenv import load_dotenv
+from dotenv import dotenv_values
 
-load_dotenv('./env')
-
+config = dotenv_values(".env")  # config = {"USER": "foo", "EMAIL": "foo@example.org"}
 # You can now set a variable called twitter, which calls the make_token function to create a new access token. You will also need to obtain the environment variables for client ID and client secret. 
 twitter = main.make_token()
-client_id = os.environ.get("CLIENT_ID")
-client_secret = os.environ.get("CLIENT_SECRET")
+client_id = config["CLIENT_ID"]
+client_secret = config["CLIENT_SECRET"]
 token_url = "https://api.twitter.com/2/oauth2/token"
 
 # Now, you can obtain the access token from Redis, which is saved corresponding with the value of token. You will also need to decode the token and replace the quotes. You can save it into a JSON object and work with it later.

@@ -9,23 +9,23 @@ import redis
 from requests.auth import AuthBase, HTTPBasicAuth
 from requests_oauthlib import OAuth2Session, TokenUpdated
 from flask import Flask, request, redirect, session, url_for, render_template
-from dotenv import load_dotenv
+from dotenv import dotenv_values
 
-load_dotenv('.env')
+config = dotenv_values('.env')
 
 # Since you will be using Redis as your database, you will need to get the environment variable from the previous step and save it into a variable named r that can be called whenever we need to access the database. Using an environment variable allows us to be flexible because you will use an internal connection string when you deploy your bot.
-r = redis.from_url(os.environ["REDIS_URL"])
+r = redis.from_url(config["REDIS_URL"])
 
 # You will need to set a variable for your app to initialize it, as is typical at the start of every Flask app. You can also create a secret key for your app, so it’s a random string using the os package.
 app = Flask(__name__)
 app.secret_key = os.urandom(50)
 
 # Back in your Python file, you can set up variables to get your environment variables for your client_id and client_secret. Additionally, you’ll need to define variables for the authorization URL as auth_url and the URL for obtaining your OAuth 2.0 token as token_url. You will also want to get the environment variable you set for your redirect URI and pass that into a new variable called redirect_uri.
-client_id = os.environ.get("CLIENT_ID")
-client_secret = os.environ.get("CLIENT_SECRET")
+client_id = config["CLIENT_ID"]
+client_secret = config["CLIENT_SECRET"]
 auth_url = "https://twitter.com/i/oauth2/authorize"
 token_url = "https://api.twitter.com/2/oauth2/token"
-redirect_uri = os.environ.get("REDIRECT_URI")
+redirect_uri = config["REDIRECT_URI"]
 
 # Now we can set the permissions you need for your bot by defining scopes. You can use the authentication mapping guide to determine what scopes you need based on your endpoints. 
 scopes = ["tweet.read", "users.read", "tweet.write", "offline.access"]
