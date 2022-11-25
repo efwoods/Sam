@@ -32,6 +32,6 @@ main.r.set("token", j_refreshed_token)
 
 # After saving the newly refreshed token back into Redis, now you can obtain a new cat fact from the cat fact API, pass that into a JSON payload, and Tweet.
 
-catgie_fact = main.parse_cat_fact()
-payload = {"text": "{}".format(catgie_fact)}
+catty_fact = main.parse_cat_fact()
+payload = {"text": "{}".format(catty_fact)}
 main.post_tweet(payload, refreshed_token)
